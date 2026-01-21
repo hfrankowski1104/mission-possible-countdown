@@ -14,7 +14,30 @@
       align-items: center;
       justify-content: center;
     }
+<script>
+  // Prevent the screen from sleeping
+  if ('wakeLock' in navigator) {
+    let wakeLock = null;
 
+    const requestWakeLock = async () => {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Wake Lock active');
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    };
+
+    requestWakeLock();
+
+    // Re-request if screen is unlocked (e.g., after tab hidden)
+    document.addEventListener('visibilitychange', () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    });
+  }
+</script>
     .countdown {
       text-align: center;
       background: rgba(0, 0, 0, 0.5);
@@ -73,4 +96,5 @@
   </script>
 </body>
 </html>
+
 
