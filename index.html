@@ -30,8 +30,15 @@
       color: #ff3333;
     }
   </style>
-</head>
-
+</head> 
+  
+<script>
+  setInterval(() => {
+    document.body.style.transform =
+      document.body.style.transform === "scale(1)" ? "scale(1.0001)" : "scale(1)";
+  }, 20000);
+</script> 
+  
 <body>
   <div class="countdown">
     <div class="time" id="timer"></div>
@@ -66,3 +73,4 @@
   </script>
 </body>
 </html>
+
