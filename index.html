@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>MISSION: POSSIBLE – PROJECT EPIC Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #000 url('mission_possible_countdown.png') center center / contain no-repeat;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 40px;
+      border-radius: 8px;
+      margin-top: 100px;
+    }
+
+    .time {
+      font-size: 80px;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+      color: #ff3333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="countdown">
+    <div class="time" id="timer"></div>
+  </div>
+
+  <script>
+    const target = new Date('October 3, 2026 04:00:00 EST').getTime();
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = target - now;
+
+      if (distance <= 0) {
+        document.getElementById('timer').textContent = 'MISSION GO LIVE!';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById('timer').textContent =
+        days + ' DAYS ' +
+        String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0');
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
